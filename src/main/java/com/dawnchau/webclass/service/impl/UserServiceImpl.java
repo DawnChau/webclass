@@ -142,5 +142,15 @@ public class UserServiceImpl implements UserService {
         return resultVO;
     }
 
+    /**
+     * 判断用户是否是管理员
+     * @param name
+     * @return
+     */
+    @Override
+    public boolean isAdmin(String name) {
+        return userRepo.findOneByAccount(name).get().getRole()==1;
+    }
+
 
 }

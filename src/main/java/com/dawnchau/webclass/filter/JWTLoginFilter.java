@@ -5,6 +5,7 @@ import com.dawnchau.webclass.constants.TokenHeaderConstants;
 import com.dawnchau.webclass.exception.PasswordWrongException;
 import com.dawnchau.webclass.exception.UserDisabledException;
 import com.dawnchau.webclass.security.AccountCredentials;
+import com.dawnchau.webclass.security.GrantedAuthorityImpl;
 import com.dawnchau.webclass.vo.ResultVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +24,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
@@ -76,8 +80,11 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
-
         String token = Jwts.builder()
+                // 将角色信息，写入token中
+                .claim(TokenHeaderConstants.HEADER_ROLE,
+                        ((List<GrantedAuthorityImpl>) authResult.
+                                getAuthorities()).get(0).getAuthority())
                 .setSubject(authResult.getName())
                 .setExpiration(new Date(System.currentTimeMillis()+60*60*24*1000))
                 .signWith(SignatureAlgorithm.HS512,TokenHeaderConstants.HEADER_SECRET)

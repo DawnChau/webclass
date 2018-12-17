@@ -1,9 +1,12 @@
 package com.dawnchau.webclass.filter;
 
 import com.dawnchau.webclass.constants.TokenHeaderConstants;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -43,14 +47,23 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
         String token = request.getHeader(TokenHeaderConstants.HEADER_AUTHORIZATION);
         if(null != token){
-            String user = Jwts.parser()
+            Claims claims = Jwts.parser()
                     .setSigningKey(TokenHeaderConstants.HEADER_SECRET)
                     .parseClaimsJws(token.replace(TokenHeaderConstants.HEADER_AUTHENTICATION,""))
-                    .getBody()
-                    .getSubject();
+                    .getBody();
+
+            String user = claims.getSubject();
+
+            // 拿权限
+            List<GrantedAuthority> authorities =
+                    AuthorityUtils
+                            .commaSeparatedStringToAuthorityList((String)claims.get(TokenHeaderConstants.HEADER_ROLE));
+
+            // 发令牌
             if( null != user){
-                return new UsernamePasswordAuthenticationToken(user,null,new ArrayList<>());
+                return new UsernamePasswordAuthenticationToken(user,null,authorities);
             }
+
         }
 
         return null;

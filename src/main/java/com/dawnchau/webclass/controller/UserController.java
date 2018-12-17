@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -22,22 +21,22 @@ public class UserController {
     @Autowired
     private HobbyUserService hobbyUserService;
 
-    @RequestMapping("/disable/{id}")
+    @RequestMapping("/admin/disable/{id}")
     public ResultVO<UserDTO> disableUser(@PathVariable Integer id){
         return userService.disableUser(id);
     }
 
-    @RequestMapping("/register")
+    @RequestMapping("/user/register")
     public ResultVO<UserDTO> register(@RequestBody UserDTO userDTO){
         return userService.register(userDTO);
     }
 
-    @RequestMapping("/info/{id}")
+    @RequestMapping("/user/info/{id}")
     public ResultVO<UserDTO> login(@PathVariable Integer id){
         return userService.getUserInfo(id);
     }
 
-    @RequestMapping("/hobbies")
+    @RequestMapping("/user/hobbies")
     public ResultVO<HobbyUserDTO> addHobbies(@RequestBody HobbyUserDTO hobbyUserDTO){
         return hobbyUserService.addHobbyForUser(hobbyUserDTO.getUserId(),hobbyUserDTO.getHobbies());
     }

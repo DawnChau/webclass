@@ -19,4 +19,6 @@ public interface UserService {
     UserDTO getUserByAccount(String username);
 
     ResultVO<UserDTO> getUserInfo(Integer id);
+
+    boolean isAdmin(String name);
 }

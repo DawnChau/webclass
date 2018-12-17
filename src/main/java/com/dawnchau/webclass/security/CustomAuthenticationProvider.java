@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -35,15 +36,23 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        // TODO 权限
 
         // 在这里进行用户名密码验证
         if(userService.isPasswordCorrect(name,password)){
 
             // 判断用户是否被封
             if(!userService.isUserDisabled(name)){
+
+                // 权限验证
+                ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+                if(userService.isAdmin(name)){
+                    // 是管理员
+                    authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+                }else{
+                    authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
+                }
                 // 生成token
-                Authentication auth = new UsernamePasswordAuthenticationToken(name,password,new ArrayList<>());
+                Authentication auth = new UsernamePasswordAuthenticationToken(name,password,authorities);
                 return auth;
             }
             throw new UserDisabledException(ResultMsgConstants.USER_DISABLED);
