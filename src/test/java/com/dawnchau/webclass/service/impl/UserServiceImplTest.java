@@ -1,4 +1,4 @@
-package com.dawnchau.webclass.service.userService;
+package com.dawnchau.webclass.service.impl;
 
 import com.dawnchau.webclass.dto.UserDTO;
 import com.dawnchau.webclass.service.UserService;

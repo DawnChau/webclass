@@ -14,4 +14,5 @@ public class ResultMsgConstants {
     public static final String USER_LOGIN_SUCCESS = "用户登录成功";
     public static final String USER_INFO_SUCCESS = "获取用户信息成功";
     public static final String USER_DISABLED = "用户被封";
+    public static final String HOBBY_ADD_SUCCESS = "习惯添加成功";
 }

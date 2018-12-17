@@ -5,6 +5,7 @@ import com.dawnchau.webclass.dao.UserRepo;
 import com.dawnchau.webclass.dto.UserDTO;
 import com.dawnchau.webclass.exception.UserDisabledException;
 import com.dawnchau.webclass.pojo.UserEntity;
+import com.dawnchau.webclass.service.HobbyUserService;
 import com.dawnchau.webclass.service.UserService;
 import com.dawnchau.webclass.utils.Dto2EntityUtils;
 import com.dawnchau.webclass.utils.Entity2DtoUtils;
@@ -78,8 +79,8 @@ public class UserServiceImpl implements UserService {
         if(entity.isPresent()){
             resultVO = new ResultVO<>(ResultMsgConstants.USER_EXIST,null);
         }else{
-            userRepo.save(Dto2EntityUtils.UserDto2Entity(userDTO));
-
+            UserEntity userEntity = userRepo.save(Dto2EntityUtils.UserDto2Entity(userDTO));
+            userDTO.setId(userEntity.getId());
             resultVO = new ResultVO<>(ResultMsgConstants.USER_SAVE_SUCCESS,userDTO);
         }
 

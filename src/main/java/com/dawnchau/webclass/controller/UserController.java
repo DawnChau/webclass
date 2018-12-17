@@ -1,7 +1,9 @@
 package com.dawnchau.webclass.controller;
 
+import com.dawnchau.webclass.dto.HobbyUserDTO;
 import com.dawnchau.webclass.dto.UserDTO;
 import com.dawnchau.webclass.security.AccountCredentials;
+import com.dawnchau.webclass.service.HobbyUserService;
 import com.dawnchau.webclass.service.UserService;
 import com.dawnchau.webclass.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private HobbyUserService hobbyUserService;
+
     @RequestMapping("/disable/{id}")
     public ResultVO<UserDTO> disableUser(@PathVariable Integer id){
         return userService.disableUser(id);
@@ -30,5 +35,10 @@ public class UserController {
     @RequestMapping("/info/{id}")
     public ResultVO<UserDTO> login(@PathVariable Integer id){
         return userService.getUserInfo(id);
+    }
+
+    @RequestMapping("/hobbies")
+    public ResultVO<HobbyUserDTO> addHobbies(@RequestBody HobbyUserDTO hobbyUserDTO){
+        return hobbyUserService.addHobbyForUser(hobbyUserDTO.getUserId(),hobbyUserDTO.getHobbies());
     }
 }

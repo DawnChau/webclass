@@ -2,6 +2,8 @@ package com.dawnchau.webclass.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserDTO {
     private Integer id;
