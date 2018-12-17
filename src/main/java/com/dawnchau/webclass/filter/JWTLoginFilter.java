@@ -3,6 +3,7 @@ package com.dawnchau.webclass.filter;
 import com.dawnchau.webclass.constants.ResultMsgConstants;
 import com.dawnchau.webclass.constants.TokenHeaderConstants;
 import com.dawnchau.webclass.exception.PasswordWrongException;
+import com.dawnchau.webclass.exception.UserDisabledException;
 import com.dawnchau.webclass.security.AccountCredentials;
 import com.dawnchau.webclass.vo.ResultVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -105,10 +106,13 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
         response.setContentType("application/json;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
 
+        // 异常处理
         if(failed instanceof UsernameNotFoundException){
             response.getWriter().println(ResultVO.fillResultString(ResultMsgConstants.USER_NOT_EXIST,null));
         }else if(failed instanceof PasswordWrongException){
             response.getWriter().println(ResultVO.fillResultString(ResultMsgConstants.USER_PASSWORD_WRONG,null));
+        }else if(failed instanceof UserDisabledException){
+            response.getWriter().println(ResultVO.fillResultString(ResultMsgConstants.USER_DISABLED,null));
         }
 
 

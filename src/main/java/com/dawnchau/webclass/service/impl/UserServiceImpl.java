@@ -3,6 +3,7 @@ package com.dawnchau.webclass.service.impl;
 import com.dawnchau.webclass.constants.ResultMsgConstants;
 import com.dawnchau.webclass.dao.UserRepo;
 import com.dawnchau.webclass.dto.UserDTO;
+import com.dawnchau.webclass.exception.UserDisabledException;
 import com.dawnchau.webclass.pojo.UserEntity;
 import com.dawnchau.webclass.service.UserService;
 import com.dawnchau.webclass.utils.Dto2EntityUtils;
@@ -93,12 +94,22 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public boolean isPasswordCorrect(String name, String password) {
+    public boolean isPasswordCorrect(String name, String password) throws UsernameNotFoundException{
         if(!userRepo.existsByAccount(name)){
             throw new UsernameNotFoundException(ResultMsgConstants.USER_NOT_EXIST);
         }
         UserDTO userDTO = Entity2DtoUtils.UserEntity2UserDto(userRepo.findOneByAccount(name).get());
         return userDTO.getPassword().equals(password);
+    }
+
+    /**
+     * 判断用户是否被封
+     * @param name
+     * @return
+     */
+    @Override
+    public boolean isUserDisabled(String name){
+        return userRepo.findOneByAccount(name).get().getDisabled()==1?true:false;
     }
 
 

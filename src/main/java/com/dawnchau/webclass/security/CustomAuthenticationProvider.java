@@ -3,6 +3,7 @@ package com.dawnchau.webclass.security;
 
 import com.dawnchau.webclass.constants.ResultMsgConstants;
 import com.dawnchau.webclass.exception.PasswordWrongException;
+import com.dawnchau.webclass.exception.UserDisabledException;
 import com.dawnchau.webclass.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -38,10 +39,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         // 在这里进行用户名密码验证
         if(userService.isPasswordCorrect(name,password)){
-            // 生成token
-            Authentication auth = new UsernamePasswordAuthenticationToken(name,password,new ArrayList<>());
-            return auth;
+
+            // 判断用户是否被封
+            if(!userService.isUserDisabled(name)){
+                // 生成token
+                Authentication auth = new UsernamePasswordAuthenticationToken(name,password,new ArrayList<>());
+                return auth;
+            }
+            throw new UserDisabledException(ResultMsgConstants.USER_DISABLED);
         }
+
 
         throw new PasswordWrongException(ResultMsgConstants.USER_PASSWORD_WRONG);
 
