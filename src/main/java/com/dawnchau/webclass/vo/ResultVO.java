@@ -12,6 +12,9 @@ public class ResultVO<T> {
 
     public T data;
 
+    public ResultVO() {
+    }
+
     public ResultVO(String msg, T data) {
         this.msg = msg;
         this.data = data;
