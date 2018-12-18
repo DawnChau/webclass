@@ -45,10 +45,26 @@ public class BookServiceImpl implements BookService {
     @Override
     public ResultVO<BookDTO> updateBooks(BookDTO bookDTO) {
         BookEntity bookEntity = Dto2EntityUtils.bookDto2Entity(bookDTO);
+        bookEntity.setId(bookDTO.getId());
         bookRepo.save(bookEntity);
         return new ResultVO<>(ResultMsgConstants.BOOK_UPDATE_SUCCESS_ADMIN,
                 Entity2DtoUtils.bookEntity2BookDto(
                         bookRepo.findById(bookEntity.getId()).get()));
+    }
+
+
+    /**
+     * 管理员添加图书
+     * @param bookDTO
+     * @return
+     */
+    @Transactional
+    @Override
+    public ResultVO<BookDTO> addBook(BookDTO bookDTO) {
+        BookEntity bookEntity = Dto2EntityUtils.bookDto2Entity(bookDTO);
+        bookEntity = bookRepo.save(bookEntity);
+        return new ResultVO<>(ResultMsgConstants.BOOK_ADD_SUCCESS_ADMIN,
+                Entity2DtoUtils.bookEntity2BookDto(bookEntity));
     }
 
 

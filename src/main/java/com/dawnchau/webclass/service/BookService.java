@@ -8,5 +8,6 @@ public interface BookService {
     String listAllBooks();
 
     ResultVO<BookDTO> updateBooks(BookDTO bookDTO);
-    
+
+    ResultVO<BookDTO> addBook(BookDTO bookDTO);
 }

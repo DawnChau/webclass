@@ -34,7 +34,6 @@ public class Dto2EntityUtils {
         bookEntity.setAuthor(bookDTO.getAuthor());
         bookEntity.setCover(bookDTO.getCover());
         bookEntity.setIsbn(bookDTO.getIsbn());
-        bookEntity.setId(bookDTO.getId());
         bookEntity.setName(bookDTO.getName());
         return bookEntity;
     }

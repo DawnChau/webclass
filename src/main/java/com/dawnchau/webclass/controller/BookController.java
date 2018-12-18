@@ -23,4 +23,9 @@ public class BookController {
     public ResultVO<BookDTO> updateBook(@RequestBody BookDTO bookDTO){
         return bookService.updateBooks(bookDTO);
     }
+
+    @RequestMapping("/admin/book/add")
+    public ResultVO<BookDTO> addBook(@RequestBody BookDTO bookDTO){
+        return bookService.addBook(bookDTO);
+    }
 }

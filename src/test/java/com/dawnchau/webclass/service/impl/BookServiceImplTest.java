@@ -37,4 +37,15 @@ public class BookServiceImplTest {
         bookDTO.setIsbn("123-456");
         log.info("{}",bookService.updateBooks(bookDTO));
     }
+
+    @Test
+    public void addBook(){
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setPrice(new BigDecimal(22));
+        bookDTO.setStock(102);
+        bookDTO.setName("Code");
+        bookDTO.setAuthor("zhoufuxiao");
+        bookDTO.setIsbn("123-456");
+        log.info("{}",bookService.addBook(bookDTO));
+    }
 }
