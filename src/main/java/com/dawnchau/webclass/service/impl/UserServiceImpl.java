@@ -3,9 +3,7 @@ package com.dawnchau.webclass.service.impl;
 import com.dawnchau.webclass.constants.ResultMsgConstants;
 import com.dawnchau.webclass.dao.UserRepo;
 import com.dawnchau.webclass.dto.UserDTO;
-import com.dawnchau.webclass.exception.UserDisabledException;
 import com.dawnchau.webclass.pojo.UserEntity;
-import com.dawnchau.webclass.service.HobbyUserService;
 import com.dawnchau.webclass.service.UserService;
 import com.dawnchau.webclass.utils.Dto2EntityUtils;
 import com.dawnchau.webclass.utils.Entity2DtoUtils;
@@ -41,7 +39,7 @@ public class UserServiceImpl implements UserService {
             // 如果用户不存在
             resultVO = new ResultVO<>(ResultMsgConstants.USER_NOT_EXIST,null);
         }else{
-            UserDTO userDTO = Entity2DtoUtils.UserEntity2UserDto(entity.get());
+            UserDTO userDTO = Entity2DtoUtils.userEntity2UserDto(entity.get());
 
             if(entity.get().getDisabled()==1){
                 // 解禁用户
@@ -79,7 +77,7 @@ public class UserServiceImpl implements UserService {
         if(entity.isPresent()){
             resultVO = new ResultVO<>(ResultMsgConstants.USER_EXIST,null);
         }else{
-            UserEntity userEntity = userRepo.save(Dto2EntityUtils.UserDto2Entity(userDTO));
+            UserEntity userEntity = userRepo.save(Dto2EntityUtils.userDto2Entity(userDTO));
             userDTO.setId(userEntity.getId());
             resultVO = new ResultVO<>(ResultMsgConstants.USER_SAVE_SUCCESS,userDTO);
         }
@@ -99,7 +97,7 @@ public class UserServiceImpl implements UserService {
         if(!userRepo.existsByAccount(name)){
             throw new UsernameNotFoundException(ResultMsgConstants.USER_NOT_EXIST);
         }
-        UserDTO userDTO = Entity2DtoUtils.UserEntity2UserDto(userRepo.findOneByAccount(name).get());
+        UserDTO userDTO = Entity2DtoUtils.userEntity2UserDto(userRepo.findOneByAccount(name).get());
         return userDTO.getPassword().equals(password);
     }
 
@@ -121,7 +119,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDTO getUserByAccount(String username) {
-        return Entity2DtoUtils.UserEntity2UserDto(userRepo.findOneByAccount(username).get());
+        return Entity2DtoUtils.userEntity2UserDto(userRepo.findOneByAccount(username).get());
     }
 
 
@@ -136,7 +134,7 @@ public class UserServiceImpl implements UserService {
         Optional<UserEntity> entity = userRepo.findById(id);
 
 
-        UserDTO userDTO = Entity2DtoUtils.UserEntity2UserDto(entity.get());
+        UserDTO userDTO = Entity2DtoUtils.userEntity2UserDto(entity.get());
         resultVO = new ResultVO<>(ResultMsgConstants.USER_INFO_SUCCESS,userDTO);
 
         return resultVO;

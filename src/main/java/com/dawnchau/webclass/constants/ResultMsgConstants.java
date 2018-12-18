@@ -16,4 +16,5 @@ public class ResultMsgConstants {
     public static final String USER_DISABLED = "用户被封";
     public static final String HOBBY_ADD_SUCCESS = "爱好添加成功";
     public static final String HOBBY_FIND_SUCCESS = "爱好查询成功";
+    public static final String BOOKS_FIND_SUCCESS_ADMIN = "所有书籍查询成功";
 }

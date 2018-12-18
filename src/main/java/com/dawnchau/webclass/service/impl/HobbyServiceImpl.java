@@ -24,7 +24,7 @@ public class HobbyServiceImpl implements HobbyService {
         List<HobbyEntity> list = hobbyRepo.findAll();
         List<HobbyDTO> hobbyDTOS = new ArrayList<>();
         for(HobbyEntity hobbyEntity: list){
-            hobbyDTOS.add(Entity2DtoUtils.HobbyEntity2HobbyDto(hobbyEntity));
+            hobbyDTOS.add(Entity2DtoUtils.hobbyEntity2HobbyDto(hobbyEntity));
         }
         return ResultVO.fillResultString(ResultMsgConstants.HOBBY_FIND_SUCCESS,hobbyDTOS);
     }

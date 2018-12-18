@@ -18,6 +18,7 @@ public class BookEntity {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)  // 主键自增
     public int getId() {
         return id;
     }

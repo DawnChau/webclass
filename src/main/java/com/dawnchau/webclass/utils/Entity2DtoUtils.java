@@ -1,7 +1,9 @@
 package com.dawnchau.webclass.utils;
 
+import com.dawnchau.webclass.dto.BookDTO;
 import com.dawnchau.webclass.dto.HobbyDTO;
 import com.dawnchau.webclass.dto.UserDTO;
+import com.dawnchau.webclass.pojo.BookEntity;
 import com.dawnchau.webclass.pojo.HobbyEntity;
 import com.dawnchau.webclass.pojo.UserEntity;
 
@@ -12,7 +14,7 @@ public class Entity2DtoUtils {
      * @param entity
      * @return
      */
-    public static UserDTO UserEntity2UserDto(UserEntity entity){
+    public static UserDTO userEntity2UserDto(UserEntity entity){
         UserDTO userDTO = new UserDTO();
         userDTO.setAccount(entity.getAccount());
         userDTO.setDisabled(entity.getDisabled()==0?false:true);
@@ -28,10 +30,27 @@ public class Entity2DtoUtils {
      * @param hobbyEntity
      * @return
      */
-    public static HobbyDTO HobbyEntity2HobbyDto(HobbyEntity hobbyEntity){
+    public static HobbyDTO hobbyEntity2HobbyDto(HobbyEntity hobbyEntity){
         HobbyDTO hobbyDTO = new HobbyDTO();
         hobbyDTO.setId(hobbyEntity.getId());
         hobbyDTO.setHobby(hobbyEntity.getHobby());
         return hobbyDTO;
+    }
+
+    /**
+     * 图书
+     * @param bookEntity
+     * @return
+     */
+    public static BookDTO bookEntity2BookDto(BookEntity bookEntity){
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setAuthor(bookEntity.getAuthor());
+        bookDTO.setCover(bookEntity.getCover());
+        bookDTO.setId(bookEntity.getId());
+        bookDTO.setIsbn(bookEntity.getIsbn());
+        bookDTO.setName(bookEntity.getName());
+        bookDTO.setPrice(bookEntity.getPrice());
+        bookDTO.setStock(bookEntity.getStock());
+        return bookDTO;
     }
 }

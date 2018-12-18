@@ -5,7 +5,7 @@ import com.dawnchau.webclass.pojo.UserEntity;
 
 public class Dto2EntityUtils {
 
-    public static UserEntity UserDto2Entity(UserDTO userDTO){
+    public static UserEntity userDto2Entity(UserDTO userDTO){
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(userDTO.getEmail());
         userEntity.setPassword(userDTO.getPassword());
