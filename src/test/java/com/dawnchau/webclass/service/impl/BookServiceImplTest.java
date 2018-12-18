@@ -48,4 +48,9 @@ public class BookServiceImplTest {
         bookDTO.setIsbn("123-456");
         log.info("{}",bookService.addBook(bookDTO));
     }
+
+    @Test
+    public void deleteBook(){
+        log.info("{}",bookService.deleteBook(1));
+    }
 }

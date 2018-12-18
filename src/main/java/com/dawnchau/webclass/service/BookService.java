@@ -10,4 +10,6 @@ public interface BookService {
     ResultVO<BookDTO> updateBooks(BookDTO bookDTO);
 
     ResultVO<BookDTO> addBook(BookDTO bookDTO);
+
+    ResultVO<BookDTO> deleteBook(Integer id);
 }

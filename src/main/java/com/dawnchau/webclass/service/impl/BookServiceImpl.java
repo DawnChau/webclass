@@ -67,5 +67,17 @@ public class BookServiceImpl implements BookService {
                 Entity2DtoUtils.bookEntity2BookDto(bookEntity));
     }
 
+    /**
+     * 管理员可以删除图书
+     * @param id
+     * @return
+     */
+    @Transactional
+    @Override
+    public ResultVO<BookDTO> deleteBook(Integer id) {
+        bookRepo.deleteById(id);
+        return new ResultVO<>(ResultMsgConstants.BOOK_DELETE_SUCCESS_ADMIN,null);
+    }
+
 
 }
