@@ -5,10 +5,12 @@ import com.dawnchau.webclass.dao.BookRepo;
 import com.dawnchau.webclass.dto.BookDTO;
 import com.dawnchau.webclass.pojo.BookEntity;
 import com.dawnchau.webclass.service.BookService;
+import com.dawnchau.webclass.utils.Dto2EntityUtils;
 import com.dawnchau.webclass.utils.Entity2DtoUtils;
 import com.dawnchau.webclass.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,4 +35,21 @@ public class BookServiceImpl implements BookService {
         }
         return ResultVO.fillResultString(ResultMsgConstants.BOOKS_FIND_SUCCESS_ADMIN,bookDTOList);
     }
+
+    /**
+     * 管理员修改某本书
+     * @param bookDTO
+     * @return
+     */
+    @Transactional
+    @Override
+    public ResultVO<BookDTO> updateBooks(BookDTO bookDTO) {
+        BookEntity bookEntity = Dto2EntityUtils.bookDto2Entity(bookDTO);
+        bookRepo.save(bookEntity);
+        return new ResultVO<>(ResultMsgConstants.BOOK_UPDATE_SUCCESS_ADMIN,
+                Entity2DtoUtils.bookEntity2BookDto(
+                        bookRepo.findById(bookEntity.getId()).get()));
+    }
+
+
 }

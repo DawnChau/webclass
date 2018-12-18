@@ -17,4 +17,5 @@ public class ResultMsgConstants {
     public static final String HOBBY_ADD_SUCCESS = "爱好添加成功";
     public static final String HOBBY_FIND_SUCCESS = "爱好查询成功";
     public static final String BOOKS_FIND_SUCCESS_ADMIN = "所有书籍查询成功";
+    public static final String BOOK_UPDATE_SUCCESS_ADMIN = "书籍更新成功";
 }
