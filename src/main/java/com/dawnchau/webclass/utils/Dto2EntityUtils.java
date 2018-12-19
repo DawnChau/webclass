@@ -1,8 +1,10 @@
 package com.dawnchau.webclass.utils;
 
 import com.dawnchau.webclass.dto.BookDTO;
+import com.dawnchau.webclass.dto.CartDTO;
 import com.dawnchau.webclass.dto.UserDTO;
 import com.dawnchau.webclass.pojo.BookEntity;
+import com.dawnchau.webclass.pojo.CartEntity;
 import com.dawnchau.webclass.pojo.UserEntity;
 
 public class Dto2EntityUtils {
@@ -36,5 +38,18 @@ public class Dto2EntityUtils {
         bookEntity.setIsbn(bookDTO.getIsbn());
         bookEntity.setName(bookDTO.getName());
         return bookEntity;
+    }
+
+    /**
+     * 购物车
+     * @param cartDTO
+     * @return
+     */
+    public static CartEntity cartDto2Entity(CartDTO cartDTO){
+        CartEntity entity = new CartEntity();
+        entity.setBookid(cartDTO.getBookid());
+        entity.setQuantity(cartDTO.getQuantity());
+        entity.setUserid(cartDTO.getUserid());
+        return entity;
     }
 }

@@ -20,4 +20,6 @@ public class ResultMsgConstants {
     public static final String BOOK_UPDATE_SUCCESS_ADMIN = "书籍更新成功";
     public static final String BOOK_ADD_SUCCESS_ADMIN = "书籍添加成功";
     public static final String BOOK_DELETE_SUCCESS_ADMIN = "书籍删除成功";
+    public static final String BOOK_NOT_EXIST = "书籍不存在";
+    public static final String CART_ADD_SUCCESS = "书籍加入购物车成功";
 }

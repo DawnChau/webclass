@@ -1,8 +1,10 @@
 package com.dawnchau.webclass.controller;
 
+import com.dawnchau.webclass.dto.CartDTO;
 import com.dawnchau.webclass.dto.HobbyUserDTO;
 import com.dawnchau.webclass.dto.UserDTO;
 import com.dawnchau.webclass.security.AccountCredentials;
+import com.dawnchau.webclass.service.CartService;
 import com.dawnchau.webclass.service.HobbyUserService;
 import com.dawnchau.webclass.service.UserService;
 import com.dawnchau.webclass.vo.ResultVO;
@@ -17,6 +19,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CartService cartService;
 
     @Autowired
     private HobbyUserService hobbyUserService;
@@ -39,5 +44,10 @@ public class UserController {
     @RequestMapping("/user/hobbies")
     public ResultVO<HobbyUserDTO> addHobbies(@RequestBody HobbyUserDTO hobbyUserDTO){
         return hobbyUserService.addHobbyForUser(hobbyUserDTO.getUserId(),hobbyUserDTO.getHobbies());
+    }
+
+    @RequestMapping("/user/addcart")
+    public ResultVO<CartDTO> addBookTocart(@RequestBody CartDTO cartDTO){
+        return cartService.addBookToCart(cartDTO);
     }
 }
