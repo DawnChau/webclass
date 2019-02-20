@@ -63,4 +63,9 @@ public class UserController {
     public ResultVO<List<OrderDTO>> listOrders(@RequestParam("userId") Integer usrtId){
         return orderService.listUserOrders(usrtId);
     }
+
+    @GetMapping("/admin/listallorders")
+    public ResultVO<List<OrderDTO>> listAllOrders(){
+        return orderService.listAllOrders();
+    }
 }

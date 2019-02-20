@@ -55,6 +55,33 @@ public class OrderServiceImpl implements OrderService{
      */
     public ResultVO<List<OrderDTO>> listUserOrders(Integer userId){
         List<OrderEntity> orderEntities = orderRepo.findByUserid(userId);
+        List<OrderDTO> orderDTOS = assmbleOrderDTOList(orderEntities);
+        ResultVO<List<OrderDTO>> res = new ResultVO<>();
+        res.setData(orderDTOS);
+        res.setMsg(ResultMsgConstants.LIST_USER_ORDERS_SUCCESS);
+        return res;
+    }
+
+
+    /**
+     * 管理员列举所有的订单
+     * @return
+     */
+    public ResultVO<List<OrderDTO>> listAllOrders(){
+        List<OrderEntity> orderEntities = orderRepo.findAll();
+        List<OrderDTO> orderDTOS = assmbleOrderDTOList(orderEntities);
+        ResultVO<List<OrderDTO>> res = new ResultVO<>();
+        res.setData(orderDTOS);
+        res.setMsg(ResultMsgConstants.LIST_ORDERS_SUCCESS);
+        return res;
+    }
+
+    /**
+     * 组装 OrderDTO 的集合
+     * @param orderEntities
+     * @return
+     */
+    private List<OrderDTO> assmbleOrderDTOList(List<OrderEntity> orderEntities) {
         List<OrderDTO> orderDTOS = new ArrayList<>();
         for(int i = 0;i<orderEntities.size();i++){
             OrderDTO orderDTO = new OrderDTO();
@@ -63,12 +90,10 @@ public class OrderServiceImpl implements OrderService{
             orderDTO.setUserid(orderEntity.getUserid());
             List<OrderDetailEntity> detailEntities = orderDetailRepo.findByOrderid(orderEntity.getId());
             orderDTO.setDetailEntities(detailEntities);
+            orderDTO.setCreateTime(orderEntity.getCreateTime().toString());
             orderDTOS.add(orderDTO);
         }
-        ResultVO<List<OrderDTO>> res = new ResultVO<>();
-        res.setData(orderDTOS);
-        res.setMsg(ResultMsgConstants.LIST_USER_ORDERS_SUCCESS);
-        return res;
+        return orderDTOS;
     }
 
 }
