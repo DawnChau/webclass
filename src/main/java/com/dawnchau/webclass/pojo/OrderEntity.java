@@ -2,6 +2,7 @@ package com.dawnchau.webclass.pojo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +11,7 @@ public class OrderEntity {
     private int id;
     private BigDecimal totalPrice;
     private int userid;
+    private Timestamp createTime;
 
     @Id
     @Column(name = "id")
@@ -42,6 +44,16 @@ public class OrderEntity {
         this.userid = userid;
     }
 
+    @Basic
+    @Column(name = "create_time")
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,12 +61,13 @@ public class OrderEntity {
         OrderEntity that = (OrderEntity) o;
         return id == that.id &&
                 userid == that.userid &&
-                Objects.equals(totalPrice, that.totalPrice);
+                Objects.equals(totalPrice, that.totalPrice) &&
+                Objects.equals(createTime, that.createTime);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, totalPrice, userid);
+        return Objects.hash(id, totalPrice, userid, createTime);
     }
 }

@@ -2,9 +2,11 @@ package com.dawnchau.webclass.controller;
 
 import com.dawnchau.webclass.dto.CartDTO;
 import com.dawnchau.webclass.dto.HobbyUserDTO;
+import com.dawnchau.webclass.dto.OrderDTO;
 import com.dawnchau.webclass.dto.UserDTO;
 import com.dawnchau.webclass.service.CartService;
 import com.dawnchau.webclass.service.HobbyUserService;
+import com.dawnchau.webclass.service.OrderService;
 import com.dawnchau.webclass.service.UserService;
 import com.dawnchau.webclass.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     private HobbyUserService hobbyUserService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping("/admin/disable/{id}")
     public ResultVO<UserDTO> disableUser(@PathVariable Integer id){
@@ -52,5 +57,10 @@ public class UserController {
     @GetMapping("/user/listallcartbooks")
     public ResultVO<List<CartDTO>> listAllBooksInCart(@RequestParam("userId") Integer usrtId){
         return cartService.listAllBooksInCart(usrtId);
+    }
+
+    @GetMapping("/user/listorders")
+    public ResultVO<List<OrderDTO>> listOrders(@RequestParam("userId") Integer usrtId){
+        return orderService.listUserOrders(usrtId);
     }
 }

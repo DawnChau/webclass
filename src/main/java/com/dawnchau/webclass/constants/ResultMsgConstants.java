@@ -25,4 +25,5 @@ public class ResultMsgConstants {
     public static final String LIST_ALL_BOOKS_SUCCESS = "列举所有购物车内书籍成功";
     public static final String STOCK_DEFICIENT = "库存不足";
     public static final String BUY_BOOK_SUCCESS = "购买图书成功";
+    public static final String LIST_USER_ORDERS_SUCCESS = "列举用户订单成功d'f";
 }
