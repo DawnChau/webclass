@@ -29,4 +29,8 @@ public class CartServiceImplTest {
         log.info("{}",cartService.addBookToCart(cartDTO));
     }
 
+    @Test
+    public void listAllBooks(){
+        log.info("{}",cartService.listAllBooksInCart(1));
+    }
 }

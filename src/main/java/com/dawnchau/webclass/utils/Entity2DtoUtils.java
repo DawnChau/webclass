@@ -1,9 +1,11 @@
 package com.dawnchau.webclass.utils;
 
 import com.dawnchau.webclass.dto.BookDTO;
+import com.dawnchau.webclass.dto.CartDTO;
 import com.dawnchau.webclass.dto.HobbyDTO;
 import com.dawnchau.webclass.dto.UserDTO;
 import com.dawnchau.webclass.pojo.BookEntity;
+import com.dawnchau.webclass.pojo.CartEntity;
 import com.dawnchau.webclass.pojo.HobbyEntity;
 import com.dawnchau.webclass.pojo.UserEntity;
 
@@ -52,5 +54,19 @@ public class Entity2DtoUtils {
         bookDTO.setPrice(bookEntity.getPrice());
         bookDTO.setStock(bookEntity.getStock());
         return bookDTO;
+    }
+
+    /**
+     * 购物车项
+     * @param entity
+     * @return
+     */
+    public static CartDTO cartEntity2CartDto(CartEntity entity){
+        CartDTO res = new CartDTO();
+        res.setQuantity(entity.getQuantity());
+        res.setBookid(entity.getBookid());
+        res.setId(entity.getId());
+        res.setUserid(entity.getUserid());
+        return res;
     }
 }

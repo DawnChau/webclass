@@ -22,4 +22,5 @@ public class ResultMsgConstants {
     public static final String BOOK_DELETE_SUCCESS_ADMIN = "书籍删除成功";
     public static final String BOOK_NOT_EXIST = "书籍不存在";
     public static final String CART_ADD_SUCCESS = "书籍加入购物车成功";
+    public static final String LIST_ALL_BOOKS_SUCCESS = "列举所有购物车内书籍成功";
 }
