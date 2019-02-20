@@ -12,6 +12,7 @@ import com.dawnchau.webclass.utils.Dto2EntityUtils;
 import com.dawnchau.webclass.utils.Entity2DtoUtils;
 import com.dawnchau.webclass.vo.ResultVO;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,13 +63,18 @@ public class CartServiceImpl implements CartService {
             resultVO.setMsg(ResultMsgConstants.BOOK_NOT_EXIST);
             return resultVO;
         }
+        cartDTO.setTotalPrice(bookDTO.getPrice().multiply(new BigDecimal(cartDTO.getQuantity())));
         cartDTO.setBookDetail(bookDTO);
         resultVO.setMsg(ResultMsgConstants.CART_ADD_SUCCESS);
         resultVO.setData(cartDTO);
         return resultVO;
     }
 
-
+    /**
+     * 列举购物车中的所有图书
+     * @param userId
+     * @return
+     */
     public ResultVO<List<CartDTO>> listAllBooksInCart(Integer userId){
         ResultVO<List<CartDTO>> resultVO = new ResultVO<>();
         List<CartDTO> cartDTOS = new ArrayList<>();
@@ -77,6 +83,7 @@ public class CartServiceImpl implements CartService {
             try {
                 CartDTO cartDTO = Entity2DtoUtils.cartEntity2CartDto(cartEntities.get(i));
                 BookDTO bookDTO = bookService.findBookById(cartDTO.getBookid());
+                cartDTO.setTotalPrice(bookDTO.getPrice().multiply(new BigDecimal(cartDTO.getQuantity())));
                 cartDTO.setBookDetail(bookDTO);
                 cartDTOS.add(cartDTO);
             } catch (BookNotExistException e) {
@@ -89,4 +96,9 @@ public class CartServiceImpl implements CartService {
         return resultVO;
 
     }
+
+    public void deleteByBookIdAndUserId(Integer bookId, Integer userId){
+        cartRepo.deleteCartEntitiesByBookidAndUserid(bookId,userId);
+    }
+
 }

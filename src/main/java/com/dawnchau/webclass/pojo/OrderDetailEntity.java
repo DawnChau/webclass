@@ -8,6 +8,7 @@ import java.util.Objects;
 @Table(name = "order_detail", schema = "webclass", catalog = "")
 public class OrderDetailEntity {
     private int id;
+    private int orderid;
     private String bookName;
     private String bookAuthor;
     private String bookIsbn;
@@ -17,12 +18,23 @@ public class OrderDetailEntity {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)  // 主键自增
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "orderid")
+    public int getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(int orderid) {
+        this.orderid = orderid;
     }
 
     @Basic
@@ -91,6 +103,7 @@ public class OrderDetailEntity {
         if (o == null || getClass() != o.getClass()) return false;
         OrderDetailEntity that = (OrderDetailEntity) o;
         return id == that.id &&
+                orderid == that.orderid &&
                 bookStock == that.bookStock &&
                 quantity == that.quantity &&
                 Objects.equals(bookName, that.bookName) &&
@@ -102,6 +115,6 @@ public class OrderDetailEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, bookName, bookAuthor, bookIsbn, bookStock, bookPrice, quantity);
+        return Objects.hash(id, orderid, bookName, bookAuthor, bookIsbn, bookStock, bookPrice, quantity);
     }
 }

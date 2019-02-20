@@ -10,4 +10,6 @@ public interface CartRepo extends JpaRepository<CartEntity,Integer>{
     List<CartEntity> findByUserid(Integer userId);
 
     CartEntity findByUseridAndBookid(Integer userId, Integer bookId);
+
+    void deleteCartEntitiesByBookidAndUserid(Integer bookId, Integer userId);
 }

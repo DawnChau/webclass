@@ -9,4 +9,6 @@ public interface CartService {
     ResultVO<CartDTO> addBookToCart(CartDTO cartDTO);
 
     ResultVO<List<CartDTO>> listAllBooksInCart(Integer userId);
+
+    void deleteByBookIdAndUserId(Integer bookId, Integer userId);
 }
