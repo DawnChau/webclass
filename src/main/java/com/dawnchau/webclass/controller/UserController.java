@@ -12,6 +12,8 @@ import com.dawnchau.webclass.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -67,5 +69,12 @@ public class UserController {
     @GetMapping("/admin/listallorders")
     public ResultVO<List<OrderDTO>> listAllOrders(){
         return orderService.listAllOrders();
+    }
+
+    @GetMapping("/user/listordersbetween")
+    public ResultVO<List<OrderDTO>> listOrdersBetween(@RequestParam("start")String start,@RequestParam("end")String end){
+
+        return orderService.findOrderBetween(new Timestamp(new Date(Long.parseLong(start)*1000L).getTime()),
+                new Timestamp(new Date(Long.parseLong(end)*1000L).getTime()));
     }
 }

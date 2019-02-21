@@ -4,6 +4,7 @@ import com.dawnchau.webclass.dto.OrderDTO;
 import com.dawnchau.webclass.pojo.OrderEntity;
 import com.dawnchau.webclass.vo.ResultVO;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface OrderService {
@@ -12,4 +13,6 @@ public interface OrderService {
     ResultVO<List<OrderDTO>> listUserOrders(Integer userId);
 
     ResultVO<List<OrderDTO>> listAllOrders();
+
+    ResultVO<List<OrderDTO>> findOrderBetween(Timestamp start, Timestamp end);
 }

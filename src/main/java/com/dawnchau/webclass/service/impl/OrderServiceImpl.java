@@ -96,4 +96,13 @@ public class OrderServiceImpl implements OrderService{
         return orderDTOS;
     }
 
+    public ResultVO<List<OrderDTO>> findOrderBetween(Timestamp start, Timestamp end){
+        List<OrderEntity> orderEntities = orderRepo.findByCreateTimeBetween(start,end);
+        List<OrderDTO> orderDTOS = assmbleOrderDTOList(orderEntities);
+        ResultVO<List<OrderDTO>> res = new ResultVO<>();
+        res.setData(orderDTOS);
+        res.setMsg(ResultMsgConstants.LIST_ORDERS_BETWEEN_SUCCESS);
+        return res;
+    }
+
 }
