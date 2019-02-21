@@ -5,6 +5,10 @@ import com.dawnchau.webclass.dto.UserDTO;
 import com.dawnchau.webclass.exception.UserDisabledException;
 import com.dawnchau.webclass.security.AccountCredentials;
 import com.dawnchau.webclass.vo.ResultVO;
+import com.dawnchau.webclass.vo.UserConsumeVo;
+
+import java.sql.Timestamp;
+import java.util.Set;
 
 public interface UserService {
 
@@ -21,4 +25,6 @@ public interface UserService {
     ResultVO<UserDTO> getUserInfo(Integer id);
 
     boolean isAdmin(String name);
+
+    ResultVO<Set<UserConsumeVo>> listUserConsume(Timestamp start, Timestamp end);
 }

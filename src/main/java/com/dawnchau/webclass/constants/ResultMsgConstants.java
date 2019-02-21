@@ -28,5 +28,7 @@ public class ResultMsgConstants {
     public static final String LIST_USER_ORDERS_SUCCESS = "列举用户订单成功";
     public static final String LIST_ORDERS_SUCCESS = "列举所有订单成功";
     public static final String LIST_ORDERS_BETWEEN_SUCCESS = "列举指定时间段的订单成功";
+    public static final String LIST_BOOK_STATISTICS_SUCCESS = "获取图书统计成功";
+    public static final String LIST_USER_CONSUME_SUCCESS = "获取用户消费成功";
 
 }

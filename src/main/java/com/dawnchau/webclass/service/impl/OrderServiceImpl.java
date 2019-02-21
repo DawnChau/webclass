@@ -96,6 +96,12 @@ public class OrderServiceImpl implements OrderService{
         return orderDTOS;
     }
 
+    /**
+     * 查询固定时间段内的订单
+     * @param start
+     * @param end
+     * @return
+     */
     public ResultVO<List<OrderDTO>> findOrderBetween(Timestamp start, Timestamp end){
         List<OrderEntity> orderEntities = orderRepo.findByCreateTimeBetween(start,end);
         List<OrderDTO> orderDTOS = assmbleOrderDTOList(orderEntities);
@@ -104,5 +110,6 @@ public class OrderServiceImpl implements OrderService{
         res.setMsg(ResultMsgConstants.LIST_ORDERS_BETWEEN_SUCCESS);
         return res;
     }
+
 
 }

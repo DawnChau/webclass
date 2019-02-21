@@ -4,17 +4,17 @@ import com.dawnchau.webclass.dto.CartDTO;
 import com.dawnchau.webclass.dto.HobbyUserDTO;
 import com.dawnchau.webclass.dto.OrderDTO;
 import com.dawnchau.webclass.dto.UserDTO;
-import com.dawnchau.webclass.service.CartService;
-import com.dawnchau.webclass.service.HobbyUserService;
-import com.dawnchau.webclass.service.OrderService;
-import com.dawnchau.webclass.service.UserService;
+import com.dawnchau.webclass.service.*;
+import com.dawnchau.webclass.vo.BookStatisticsVO;
 import com.dawnchau.webclass.vo.ResultVO;
+import com.dawnchau.webclass.vo.UserConsumeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class UserController {
@@ -30,6 +30,9 @@ public class UserController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private BookService bookService;
 
     @RequestMapping("/admin/disable/{id}")
     public ResultVO<UserDTO> disableUser(@PathVariable Integer id){
@@ -75,6 +78,18 @@ public class UserController {
     public ResultVO<List<OrderDTO>> listOrdersBetween(@RequestParam("start")String start,@RequestParam("end")String end){
 
         return orderService.findOrderBetween(new Timestamp(new Date(Long.parseLong(start)*1000L).getTime()),
+                new Timestamp(new Date(Long.parseLong(end)*1000L).getTime()));
+    }
+
+    @GetMapping("/admin/statistics")
+    public ResultVO<Set<BookStatisticsVO>> listStatistics(@RequestParam("start")String start,@RequestParam("end")String end){
+        return bookService.bookStatistics(new Timestamp(new Date(Long.parseLong(start)*1000L).getTime()),
+                new Timestamp(new Date(Long.parseLong(end)*1000L).getTime()));
+    }
+
+    @GetMapping("/admin/userconsume")
+    public ResultVO<Set<UserConsumeVo>> listUserConsume(@RequestParam("start")String start, @RequestParam("end")String end){
+        return userService.listUserConsume(new Timestamp(new Date(Long.parseLong(start)*1000L).getTime()),
                 new Timestamp(new Date(Long.parseLong(end)*1000L).getTime()));
     }
 }
