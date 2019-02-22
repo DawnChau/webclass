@@ -37,6 +37,6 @@ public class UserServiceImplTest {
 
     @Test
     public void getUserInfo(){
-        log.info("{}",userService.getUserInfo(1));
+        log.info("{}",userService.getUserInfo("dawnchau"));
     }
 }

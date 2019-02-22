@@ -20,9 +20,7 @@ public interface UserService {
 
     boolean isUserDisabled(String name);
 
-    UserDTO getUserByAccount(String username);
-
-    ResultVO<UserDTO> getUserInfo(Integer id);
+    ResultVO<UserDTO> getUserInfo(String username);
 
     boolean isAdmin(String name);
 

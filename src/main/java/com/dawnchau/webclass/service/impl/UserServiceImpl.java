@@ -124,25 +124,14 @@ public class UserServiceImpl implements UserService {
 
 
     /**
-     * 通过用户名获取用户
+     * 获取用户信息
      * @param username
      * @return
      */
     @Override
-    public UserDTO getUserByAccount(String username) {
-        return Entity2DtoUtils.userEntity2UserDto(userRepo.findOneByAccount(username).get());
-    }
-
-
-    /**
-     * 获取用户信息
-     * @param id
-     * @return
-     */
-    @Override
-    public ResultVO<UserDTO> getUserInfo(Integer id) {
+    public ResultVO<UserDTO> getUserInfo(String username) {
         ResultVO<UserDTO> resultVO = null;
-        Optional<UserEntity> entity = userRepo.findById(id);
+        Optional<UserEntity> entity = userRepo.findOneByAccount(username);
 
 
         UserDTO userDTO = Entity2DtoUtils.userEntity2UserDto(entity.get());

@@ -44,9 +44,9 @@ public class UserController {
         return userService.register(userDTO);
     }
 
-    @RequestMapping("/user/info/{id}")
-    public ResultVO<UserDTO> login(@PathVariable Integer id){
-        return userService.getUserInfo(id);
+    @RequestMapping("/user/info/{username}")
+    public ResultVO<UserDTO> login(@PathVariable String username){
+        return userService.getUserInfo(username);
     }
 
     @RequestMapping("/user/hobbies")
