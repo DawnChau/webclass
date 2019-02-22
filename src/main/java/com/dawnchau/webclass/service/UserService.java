@@ -8,6 +8,7 @@ import com.dawnchau.webclass.vo.ResultVO;
 import com.dawnchau.webclass.vo.UserConsumeVo;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 public interface UserService {
@@ -25,4 +26,6 @@ public interface UserService {
     boolean isAdmin(String name);
 
     ResultVO<Set<UserConsumeVo>> listUserConsume(Timestamp start, Timestamp end);
+
+    ResultVO<List<UserDTO>> getAllUsers();
 }

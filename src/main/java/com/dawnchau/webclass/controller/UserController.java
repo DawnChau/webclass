@@ -74,6 +74,11 @@ public class UserController {
         return orderService.listAllOrders();
     }
 
+    @GetMapping("/admin/listallusers")
+    public ResultVO<List<UserDTO>> listAllUsers(){
+        return userService.getAllUsers();
+    }
+
     @GetMapping("/user/listordersbetween")
     public ResultVO<List<OrderDTO>> listOrdersBetween(@RequestParam("start")String start,@RequestParam("end")String end){
 

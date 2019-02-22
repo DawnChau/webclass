@@ -140,6 +140,28 @@ public class UserServiceImpl implements UserService {
         return resultVO;
     }
 
+
+    /**
+     * 获取用户信息
+     * @param
+     * @return
+     */
+    @Override
+    public ResultVO<List<UserDTO>> getAllUsers() {
+        ResultVO<List<UserDTO>> resultVO = null;
+        List<UserEntity> entities = userRepo.findAll();
+        List<UserDTO> list = new ArrayList<>();
+
+        for(UserEntity entity:entities){
+            UserDTO userDTO = Entity2DtoUtils.userEntity2UserDto(entity);
+            list.add(userDTO);
+        }
+
+        resultVO = new ResultVO<>(ResultMsgConstants.LIST_ALL_USERS_SUCCESS,list);
+
+        return resultVO;
+    }
+
     /**
      * 判断用户是否是管理员
      * @param name
