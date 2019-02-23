@@ -21,6 +21,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -97,6 +99,11 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
         response.getWriter().println(ResultVO.fillResultString(ResultMsgConstants.USER_LOGIN_SUCCESS,
                 token));
 
+        response.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, OPTIONS, DELETE");
+
 
     }
 
@@ -122,6 +129,20 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             response.getWriter().println(ResultVO.fillResultString(ResultMsgConstants.USER_DISABLED,null));
         }
 
-
+        response.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, OPTIONS, DELETE");
     }
+
+
+//    @Override
+//    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+//        HttpServletResponse httpResponse = (HttpServletResponse)res;
+//        httpResponse.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+//        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+//        httpResponse.addHeader("Access-Control-Allow-Origin", "*");
+//        httpResponse.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, OPTIONS, DELETE");
+//        chain.doFilter(req, httpResponse);
+//    }
 }
